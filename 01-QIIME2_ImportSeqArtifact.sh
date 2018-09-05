@@ -14,7 +14,7 @@
 
 #Path Variables
 INPUT=/rhome/adesa002/shared/NPRB/18S/data-raw/18S-euk-2017-run3/demul_redo/raw_fastq/
-SEQ_ARTIFACT=/rhome/adesa002/shared/NPRB/QIIME2018v8_18s_05Sep2018/NPRB_DemulSeq.qza
+SEQ_ARTIFACT=/rhome/adesa002/shared/NPRB/18S/analysis-results/QIIME2018v8_18s_05Sep2018/NPRB_DemulSeq.qza
 
 #Activate QIIME2v2018.8
 export LC_ALL=en_US.utf-8
