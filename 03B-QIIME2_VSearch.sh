@@ -29,7 +29,7 @@ qiime vsearch join-pairs \
 --p-truncqual 32 \
 --o-joined-sequences $OUTPUT_JOINEDSEQ &&
 
-qiime vsearch dereplication \
+qiime vsearch dereplicate-sequences \
 --i-sequences $OUTPUT_JOINEDSEQ \
 --o-dereplicated-table $OUTPUT_TABLE \
 --o-dereplicated-sequences $OUTPUT_REPSEQ
