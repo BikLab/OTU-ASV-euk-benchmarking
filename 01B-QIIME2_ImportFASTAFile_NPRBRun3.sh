@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --job-name="ImportSeq_Artifacts"
+#SBATCH --job-name="ImportFASTA"
 #SBATCH --partition=batch
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
@@ -9,12 +9,12 @@
 #SBATCH --time=7-00:00:00
 #SBATCH --mail-user=adesa002@ucr.edu
 #SBATCH --mail-type=BEGIN,END,FAIL
-#SBATCH -e ImportSeq_Artifacts.err-%N
-#SBATCH -o ImportSeq_Artifacts.out-%N
+#SBATCH -e ImportFASTA.err-%N
+#SBATCH -o ImportFASTA.out-%N
 
 #Path Variables
-INPUT=/bigdata/biklab/shared/NPRB/18S/data-clean/NPRB_18S_2014_2016_2017_allsamplesMerged.faa
-SEQ_ARTIFACT=/rhome/adesa002/shared/NPRB/18S/analysis-results/QIIME2018v8_18s_05Sep2018/NPRB_DemulSeq_AllRuns_FASTA.qza
+INPUT=/rhome/adesa002/shared/NPRB/18S/data-raw/18S-euk-2017-run3/demul_redo/NPRB_Run3_TrimmedMerged.fa
+OUTPUT=/rhome/adesa002/shared/NPRB/18S/analysis-results/QIIME2018v8_18s_05Sep2018/NPRB_DemulSeq_Run3Raw_FASTA.qza
 
 #Activate QIIME2v2018.8
 export LC_ALL=en_US.utf-8
@@ -23,6 +23,7 @@ source activate qiime2-2018.8
 
 #Script
 qiime tools import \
---type 'SampleData[Sequences]' \
 --input-path $INPUT \
---output-path $SEQ_ARTIFACT
+--output-path $OUTPUT \
+--type 'SampleData[Sequences]'
+

@@ -13,8 +13,8 @@
 #SBATCH -o VisualizeSeq.out-%N
 
 #Path Variables
-INPUT=/rhome/adesa002/shared/NPRB/18S/analysis-results/QIIME2018v8_18s_05Sep2018/NPRB_DemulSeq.qza
-OUTPUT=/rhome/adesa002/shared/NPRB/18S/analysis-results/QIIME2018v8_18s_05Sep2018/NPRB_VisDemulSeq.qzv
+INPUT=/rhome/adesa002/shared/NPRB/18S/analysis-results/QIIME2018v8_18s_05Sep2018/NPRB_DemulSeq_Run3Raw_FASTQ.qza
+OUTPUT=/rhome/adesa002/shared/NPRB/18S/analysis-results/QIIME2018v8_18s_05Sep2018/NPRB_DemulSeq_Run3Raw_Vis_FASTQ.qzv
 
 #Activate QIIME2v2018.8
 export LC_ALL=en_US.utf-8
