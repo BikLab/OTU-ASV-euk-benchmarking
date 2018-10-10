@@ -13,8 +13,8 @@
 #SBATCH -o Rarefy-BiomTable.out-%N
 
 #Path Variables
-INPUT=/rhome/adesa002/shared/NPRB/18S/analysis-results/QIIME2018v8_18s_05Sep2018/VSearch/FeatureTable/NPRB_Run3_Clustered_99_FeatureTable.qza
-OUTPUT=/rhome/adesa002/shared/NPRB/18S/analysis-results/QIIME2018v8_18s_05Sep2018/VSearch/FeatureTable/NPRB_Run3_Clustered_99_Rarefied_1000_FeatureTable.qza
+INPUT=/rhome/adesa002/shared/memb/18S/analysis-results/QIIME2_EukBenchmark_05Oct2018/VSearch/FeatureTable/MEMB_Clustered_99_FeatureTable.qza
+OUTPUT=/rhome/adesa002/shared/memb/18S/analysis-results/QIIME2_EukBenchmark_05Oct2018/VSearch/FeatureTable/MEMB_Clustered_99_Rarefied_1000_FeatureTable.qza
 
 #Activate QIIME2v2018.8
 export LC_ALL=en_US.utf-8
