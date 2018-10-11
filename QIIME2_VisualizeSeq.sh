@@ -18,7 +18,7 @@ OUTPUT=/rhome/adesa002/shared/NPRB/18S/analysis-results/QIIME2018v8_18s_05Sep201
 
 #Activate QIIME2v2018.8
 export LC_ALL=en_US.utf-8
-export LANG=en_US.utf-8
+export LANG=en_US.utf-
 source activate qiime2-2018.8
 
 #Script
