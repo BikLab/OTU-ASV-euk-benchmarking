@@ -13,8 +13,8 @@
 #SBATCH -o BetaDiv.out-%N
 
 #Path Variables
-INPUT=/rhome/adesa002/shared/NPRB/18S/analysis-results/QIIME2018v8_18s_05Sep2018/DADA2/FeatureTable/NPRB_Run3_ASV_Rarefied_1000_FeatureTable.qza
-OUTPUT=/rhome/adesa002/shared/NPRB/18S/analysis-results/QIIME2018v8_18s_05Sep2018/DADA2/BetaDiversity/NPRB_Run3_ASV_Rarefied_1000_BrayCurtis_DistanceMatrix.qza
+INPUT=/rhome/adesa002/shared/memb/18S/analysis-results/QIIME2_EukBenchmark_05Oct2018/DADA2/FeatureTable/MEMB_ASV_Rarefied_1000_FeatureTable.qza
+OUTPUT=/rhome/adesa002/shared/memb/18S/analysis-results/QIIME2_EukBenchmark_05Oct2018/DADA2/BetaDiversity/MEMB_ASV_Rarefied_1000_BrayCurtis_DistanceMatrix.qza
 
 #Activate QIIME2v2018.8
 export LC_ALL=en_US.utf-8
