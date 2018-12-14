@@ -79,9 +79,9 @@ plot_pro <- ggplot(dada2_vsearch_merged) +
   #facet_wrap(~ Subregion, ncol = 3)  +
   #facet_grid(cols = vars(Subregion)) +
   theme_bw() +
-  facet_grid(. ~Subregion) +
   theme(aspect.ratio = 1) 
-  
+#  facet_grid(. ~Subregion) 
+
 plot_pro
 
 cairo_pdf("Desktop/DADA2_VSearch_Procruste_Analysis_Facet.pdf", family="Arial Unicode MS", 4,4,
