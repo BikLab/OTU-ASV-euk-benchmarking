@@ -24,7 +24,7 @@ TAX <- tax_table(vsearch_matrix)
 uclust_biom <- import_biom("Desktop/BiomTable_TaxonomyFiles/UCLUST_BiomTable_w_RDPTaxonomy.biom")
 
 ##### INPUT DADA2 - And Fix the SampleNames to Match the MappingFile #####
-dada2_biom <- import_biom("Desktop/BiomTable_TaxonomyFiles/DADA2_BiomTable_w_BlastTaxonomy.biom")
+dada2_biom <- import_biom("Desktop/BiomTable_TaxonomyFiles/DADA2_OptimalFiltering_SILVARef_Blast_Taxonomy.biom")
 
 otu_table(dada2_biom)
 colnames(otu_table(dada2_biom)) <- gsub("NPRB3_", "", colnames(otu_table(dada2_biom)))

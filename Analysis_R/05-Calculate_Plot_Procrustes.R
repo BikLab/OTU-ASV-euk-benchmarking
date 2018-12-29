@@ -69,23 +69,22 @@ names(metadata_df)[names(metadata_df) == 'X.SampleID'] <- 'Sample'
 dada2_vsearch_merged <- merge(dada2_vsearch_merged, metadata_df, by="Sample")
 
 plot_pro <- ggplot(dada2_vsearch_merged) +
-  geom_point(aes(x=PC1, y=PC2, colour=`Clustering Algorithm`), shape="\u25D6", size=3, fill="black") +
-  geom_point(aes(x=PC1, y=PC2, color=Region), shape="\u25D7", size=3) +  
-  geom_point(aes(x=xPC1, y=xPC2, colour=`xClustering Algorithm`), shape="\u25D6", size=3, fill="red") +
-  geom_point(aes(x=xPC1, y=xPC2, color=Region), shape="\u25D7", size=3) +
-  scale_color_manual(values=c("blue", "green","black",  "red", "purple","yellow", "pink", "orange", "black", "red")) +
+  geom_point(aes(x=PC1, y=PC2, colour=`Clustering Algorithm`), size=1, fill="black") +
+  geom_point(aes(x=xPC1, y=xPC2, colour=`xClustering Algorithm`), size=1, fill="red") +
+  scale_color_manual(values=c("black", "black", "#0066CC", "#FF6666", "yellow", "pink", "orange", "black", "red")) +
   scale_fill_manual(values=c("black", "red")) +
-  geom_segment(aes(x=PC1,y=PC2,xend=xPC1,yend=xPC2),arrow=arrow(type = "open", length=unit(0.1,"cm")), color="black") +
-  #facet_wrap(~ Subregion, ncol = 3)  +
-  #facet_grid(cols = vars(Subregion)) +
+  geom_segment(aes(x=PC1,y=PC2,xend=xPC1,yend=xPC2, color=Region),arrow=arrow(type = "open", length=unit(0.1,"cm"))) +
+  facet_wrap(~ Subregion, ncol = 3)  +
+  facet_grid(cols = vars(Subregion)) +
   theme_bw() +
   theme(aspect.ratio = 1) 
 #  facet_grid(. ~Subregion) 
 
 plot_pro
 
-cairo_pdf("Desktop/DADA2_VSearch_Procruste_Analysis_Facet.pdf", family="Arial Unicode MS", 4,4,
-          width=11.5, height=8)
+#Save Figure
+tiff(file = "Desktop/QIIME2-EukBench-Figures/Procruste_DADA2_VSearch_Facet_Subregion.tif", 
+     width=11.5, height=8, units = "in", res = 300)
 plot_pro
 dev.off()
 
@@ -106,25 +105,23 @@ dada2_uclust_merged$Row.names <- NULL
 names(metadata_df)[names(metadata_df) == 'X.SampleID'] <- 'Sample'
 dada2_uclust_merged <- merge(dada2_uclust_merged, metadata_df, by="Sample")
 
-
 plot_pro <- ggplot(dada2_uclust_merged) +
-  geom_point(aes(x=PC1, y=PC2, colour=`Clustering Algorithm`), shape="\u25D6", size=3, fill="black") +
-  geom_point(aes(x=PC1, y=PC2, color=Region), shape="\u25D7", size=3) +  
-  geom_point(aes(x=xPC1, y=xPC2, colour=`xClustering Algorithm`), shape="\u25D6", size=3, fill="red") +
-  geom_point(aes(x=xPC1, y=xPC2, color=Region), shape="\u25D7", size=3) +
-  scale_color_manual(values=c("blue", "green","black",  "red", "purple","yellow", "pink", "orange", "black", "red")) +
+  geom_point(aes(x=PC1, y=PC2, colour=`Clustering Algorithm`), size=1, fill="black") +
+  geom_point(aes(x=xPC1, y=xPC2, colour=`xClustering Algorithm`), size=1, fill="red") +
+  scale_color_manual(values=c("black", "black", "#0066CC", "#FF6666", "yellow", "pink", "orange", "black", "red")) +
   scale_fill_manual(values=c("black", "red")) +
-  geom_segment(aes(x=PC1,y=PC2,xend=xPC1,yend=xPC2),arrow=arrow(type = "open", length=unit(0.1,"cm")), color="black") +
-  #facet_wrap(~ Subregion, ncol = 3)  +
-  #facet_grid(cols = vars(Subregion)) +
+  geom_segment(aes(x=PC1,y=PC2,xend=xPC1,yend=xPC2, color=Region),arrow=arrow(type = "open", length=unit(0.1,"cm"))) +
+  facet_wrap(~ Subregion, ncol = 3)  +
+  facet_grid(cols = vars(Subregion)) +
   theme_bw() +
-  facet_grid(. ~Subregion) +
   theme(aspect.ratio = 1) 
+#  facet_grid(. ~Subregion) 
 
 plot_pro
 
-cairo_pdf("Desktop/DADA2_UCLUST_Procruste_Analysis_Facet.pdf", family="Arial Unicode MS", 4,4,
-          width=11.5, height=8)
+#Save Figure
+tiff(file = "Desktop/QIIME2-EukBench-Figures/Procruste_DADA2_UCLUST_Facet_Subregion.tif", 
+     width=11.5, height=8, units = "in", res = 300)
 plot_pro
 dev.off()
 
@@ -147,22 +144,21 @@ names(metadata_df)[names(metadata_df) == 'X.SampleID'] <- 'Sample'
 uclust_vsearch_merged <- merge(uclust_vsearch_merged, metadata_df, by="Sample")
 
 plot_pro <- ggplot(uclust_vsearch_merged) +
-  geom_point(aes(x=PC1, y=PC2, colour=`Clustering Algorithm`), shape="\u25D6", size=3, fill="black") +
-  geom_point(aes(x=PC1, y=PC2, color=Region), shape="\u25D7", size=3) +  
-  geom_point(aes(x=xPC1, y=xPC2, colour=`xClustering Algorithm`), shape="\u25D6", size=3, fill="red") +
-  geom_point(aes(x=xPC1, y=xPC2, color=Region), shape="\u25D7", size=3) +
-  scale_color_manual(values=c("blue", "green","black",  "red", "purple","yellow", "pink", "orange", "black", "red")) +
-  scale_fill_manual(values=c("black", "red")) +
-  geom_segment(aes(x=PC1,y=PC2,xend=xPC1,yend=xPC2),arrow=arrow(type = "open", length=unit(0.1,"cm")), color="black") +
-  #facet_wrap(~ Subregion, ncol = 3)  +
-  #facet_grid(cols = vars(Subregion)) +
+  geom_point(aes(x=PC1, y=PC2, colour=`Clustering Algorithm`), size=1, fill="black") +
+  geom_point(aes(x=xPC1, y=xPC2, colour=`xClustering Algorithm`), size=1, fill="red") +
+  scale_color_manual(values=c("black", "black", "#0066CC", "#FF6666", "yellow", "pink", "orange", "black", "red")) +
+  scale_fill_manual(values=c("black", "black")) +
+  geom_segment(aes(x=PC1,y=PC2,xend=xPC1,yend=xPC2, color=Region),arrow=arrow(type = "open", length=unit(0.1,"cm"))) +
+  facet_wrap(~ Subregion, ncol = 3)  +
+  facet_grid(cols = vars(Subregion)) +
   theme_bw() +
-  facet_grid(. ~Subregion) +
   theme(aspect.ratio = 1) 
+#  facet_grid(. ~Subregion) 
 
 plot_pro
 
-cairo_pdf("Desktop/UCLUST_VSearch_Procruste_Analysis_Facet.pdf", family="Arial Unicode MS", 4,4,
-          width=11.5, height=8)
+#Save Figure
+tiff(file = "Desktop/QIIME2-EukBench-Figures/Procruste_UCLUST_VSearch_Facet_Subregion.tif", 
+     width=11.5, height=8, units = "in", res = 300)
 plot_pro
 dev.off()
