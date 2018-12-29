@@ -97,7 +97,6 @@ NT_ObservedRichness <- plot_richness(NT_Phylo_MergedSubRegion, color = "Subregio
   plot_theme + theme(axis.text = element_blank(), axis.title = element_blank(), plot.title = element_text(face = "bold", size = 14)) +
   scale_color_manual(values = c("deepskyblue4", "darkslateblue", "darkorange4", "goldenrod4", "deeppink4", "darkolivegreen4")) + ylim(0, 2500)
 
-
 ##### Plot Shannon Index ##### 
 plot_theme <- theme_bw() + theme(axis.text.x = element_blank(), axis.title.x = element_blank(), axis.ticks = element_blank(), strip.background = element_blank(), strip.text.x = element_blank())
 
@@ -165,15 +164,61 @@ Final_DataFrame <- rbind(OT_ST_DataFrame, NT_DataFrame)
 Final_DataFrame$TreatmentOrder = factor(Final_DataFrame$Treatment, levels=c('Optimal','Stringent','None'))
 
 ##### Plot Reads per Subregion ##### 
+levels(Final_DataFrame$Subregion) <- c("AlaskanBeaufortShelf" = "Alaskan Beaufort Shelf", "AmundsenGulf" = "Amundsen Gulf", "BanksIsland" = "Banks Island",
+                                       "CamdenBay" = "Camden Bay", "ChukchiSea" = "Chukchi Sea" ,"MackenzieRiverPlume" = "Mackenzie River Plume")
+
 ReadsSubRegion <- ggplot(Final_DataFrame, aes(Subregion, Abundance, fill=Subregion)) + geom_bar(stat="identity", position = "stack") + 
-  theme_bw() + theme(axis.text.x = element_blank(), axis.ticks.x = element_blank()) + facet_grid(. ~ TreatmentOrder) + 
-  scale_y_continuous(labels = comma) + labs(title = "Number of Reads per Trimming Parameter", y = "Number of Reads") + 
+  theme_bw() + theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank()) + facet_grid(. ~ TreatmentOrder) +
+  theme(axis.title = element_text(face = "bold", size =14), strip.text = element_text(face = "bold", size = 14)) +
+  scale_y_continuous(labels = comma, expand = c(0,0), limits = c(0,3100000)) + labs(y = "Number of Reads") + 
   scale_fill_manual(values = c("deepskyblue4", "darkslateblue", "darkorange4", "goldenrod4", "deeppink4", "darkolivegreen4"))
 ReadsSubRegion
 
 tiff(file = "Desktop/GoogleDrive/BikLab/QIIME2-EukBenchmark/Analysis/DADA2-FilteringParameters/NumberofReads_Subregions.tiff", 
      width=11.5, height=8, units = "in", res = 300)
 ReadsSubRegion
+dev.off()
+
+levels(Final_DataFrame$Subregion) <- c("AlaskanBeaufortShelf" = "ABS", "AmundsenGulf" = "AG", "BanksIsland" = "BI",
+                                       "CamdenBay" = "CB", "ChukchiSea" = "CS" ,"MackenzieRiverPlume" = "MRP")
+
+ReadsSample <- ggplot(Final_DataFrame, aes(Sample, Abundance, fill=Subregion), color="black") + geom_bar(stat="identity", position = "stack", width = 0.9) + 
+  theme_bw() + theme(axis.text.x = element_text(hjust = 1, angle = 60, size = 4), axis.text.y = element_text(size = 8), panel.grid.major = element_blank(), panel.grid.minor = element_blank()) + facet_grid(rows = vars(TreatmentOrder), cols = vars(Subregion), drop = TRUE, scales = "free", space = "free") +
+  theme(axis.title = element_text(face = "bold", size =14), strip.text = element_text(face = "bold", size = 8), panel.spacing.x=unit(0, "lines"), panel.grid.minor = element_blank()) +
+  scale_y_continuous(labels = comma, expand = c(0,0), limits = c(0,250000)) + labs(y = "Number of Reads") + 
+  scale_fill_manual(values = c("deepskyblue4", "darkslateblue", "darkorange4", "goldenrod4", "deeppink4", "darkolivegreen4"))
+
+ReadsSample
+
+tiff(file = "Desktop/GoogleDrive/BikLab/QIIME2-EukBenchmark/Analysis/DADA2-FilteringParameters/NumberofReads_Samples.tiff", 
+     width=11.5, height=8, units = "in", res = 300)
+ReadsSample
+dev.off()
+
+##### Make  Data Frame with Sum of Reads per Sample #####
+OT_SampleSum <- data.frame(sum = sample_sums(OT_Phylo))
+ST_SampleSum <- data.frame(sum = sample_sums(ST_Phylo))
+NT_SampleSum <- data.frame(sum = sample_sums(NT_Phylo))
+
+OT_SampleSum$Treatment <- "Optimal"
+ST_SampleSum$Treatment <- "Stringent"
+NT_SampleSum$Treatment <- "None"
+
+OT_ST_SampleSum <- rbind(OT_SampleSum, ST_SampleSum)
+Final_SampleSum <- rbind(OT_ST_SampleSum, NT_SampleSum)
+Final_SampleSum$TreatmentOrder = factor(Final_SampleSum$Treatment, levels=c('Optimal','Stringent','None'))
+
+##### Histogram of sample read counts #####
+SeqDepth <- ggplot(Final_SampleSum, aes(x = sum)) + facet_grid(rows = vars(TreatmentOrder)) +
+  geom_histogram(color = "black", fill = "darkslateblue", binwidth = 2500) +
+  xlab("Number of Reads") + ylab("Count") + 
+  scale_y_continuous(expand = c(0,0), limits = c(0,13)) +
+  theme_bw() + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
+  theme(axis.title = element_text(face = "bold", size =14), strip.text = element_text(face = "bold", size = 14)) 
+
+tiff(file = "Desktop/GoogleDrive/BikLab/QIIME2-EukBenchmark/Analysis/DADA2-FilteringParameters/DADA2_SeqDepth_Histogram.tiff", 
+     width=11.5, height=8, units = "in", res = 300)
+SeqDepth
 dev.off()
 
 ##### Rarefy Samples to 1000Seq/Samples and 2500 Seq/Sample #####
@@ -188,11 +233,19 @@ NT_Ordinate1000 = ordinate(NT_Phylo_Rarefied1000, "PCoA", "bray")
 
 ##### Plot PCoA #####
 OT_PCoA1000 <- plot_ordination(OT_Phylo_Rarefied1000, OT_Ordinate1000, color="Subregion", title = "Optimal") + geom_point(size=2) + theme_bw() + 
-  theme(aspect.ratio = 1) + scale_color_manual(values = c("deepskyblue4", "darkslateblue", "darkorange4", "goldenrod4", "deeppink4", "darkolivegreen4"))
+  theme(aspect.ratio = 1, axis.text = element_blank(), axis.ticks = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
+  theme(plot.title = element_text(face = "bold", size =14), axis.title = element_text(face = "bold", size =14), strip.text = element_text(face = "bold", size = 14)) + ylim(-0.5,0.5) + xlim(-0.5,0.6) +
+  scale_color_manual(values = c("deepskyblue4", "darkslateblue", "darkorange4", "goldenrod4", "deeppink4", "darkolivegreen4"))
+
 ST_PCoA1000 <- plot_ordination(ST_Phylo_Rarefied1000, ST_Ordinate1000, color="Subregion", title = "Stringent") + geom_point(size=2) + theme_bw() + 
-  theme(aspect.ratio = 1) + scale_color_manual(values = c("deepskyblue4", "darkslateblue", "darkorange4", "goldenrod4", "deeppink4", "darkolivegreen4"))
+  theme(aspect.ratio = 1, axis.text = element_blank(), axis.ticks = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
+  theme(plot.title = element_text(face = "bold", size =14),axis.title = element_text(face = "bold", size =14), strip.text = element_text(face = "bold", size = 14)) + ylim(-0.5,0.5) + xlim(-0.5,0.6) +
+  scale_color_manual(values = c("deepskyblue4", "darkslateblue", "darkorange4", "goldenrod4", "deeppink4", "darkolivegreen4"))
+
 NT_PCoA1000 <- plot_ordination(NT_Phylo_Rarefied1000, NT_Ordinate1000, color="Subregion", title = "None") + geom_point(size=2) + theme_bw() + 
-  theme(aspect.ratio = 1) + scale_color_manual(values = c("deepskyblue4", "darkslateblue", "darkorange4", "goldenrod4", "deeppink4", "darkolivegreen4"))
+  theme(aspect.ratio = 1, axis.text = element_blank(), axis.ticks = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
+  theme(plot.title = element_text(face = "bold", size =14),axis.title = element_text(face = "bold", size =14), strip.text = element_text(face = "bold", size = 14)) + ylim(-0.5,0.5) + xlim(-0.5,0.6) +
+  scale_color_manual(values = c("deepskyblue4", "darkslateblue", "darkorange4", "goldenrod4", "deeppink4", "darkolivegreen4"))
 
 PCoA1000 <- ggarrange(OT_PCoA1000, ST_PCoA1000, NT_PCoA1000, common.legend = TRUE,
                        ncol = 3, nrow = 1, legend = "right", align = "hv") 
@@ -215,11 +268,17 @@ NT_Ordinate2500 = ordinate(NT_Phylo_Rarefied2500, "PCoA", "bray")
 
 ##### Plot PCoA #####
 OT_PCoA2500 <- plot_ordination(OT_Phylo_Rarefied2500, OT_Ordinate2500, color="Subregion", title = "Optimal") + geom_point(size=2) + theme_bw() + 
-  theme(aspect.ratio = 1) + scale_color_manual(values = c("deepskyblue4", "darkslateblue", "darkorange4", "goldenrod4", "deeppink4", "darkolivegreen4"))
+  theme(aspect.ratio = 1, axis.text = element_blank(), axis.ticks = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
+  theme(plot.title = element_text(face = "bold", size =14), axis.title = element_text(face = "bold", size =14), strip.text = element_text(face = "bold", size = 14)) + ylim(-0.5,0.5) + xlim(-0.5,0.6) +
+  scale_color_manual(values = c("deepskyblue4", "darkslateblue", "darkorange4", "goldenrod4", "deeppink4", "darkolivegreen4"))
 ST_PCoA2500 <- plot_ordination(ST_Phylo_Rarefied2500, ST_Ordinate2500, color="Subregion", title = "Stringent") + geom_point(size=2) + theme_bw() + 
-  theme(aspect.ratio = 1) + scale_color_manual(values = c("deepskyblue4", "darkslateblue", "darkorange4", "goldenrod4", "deeppink4", "darkolivegreen4"))
+  theme(aspect.ratio = 1, axis.text = element_blank(), axis.ticks = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
+  theme(plot.title = element_text(face = "bold", size =14), axis.title = element_text(face = "bold", size =14), strip.text = element_text(face = "bold", size = 14)) + ylim(-0.5,0.5) + xlim(-0.5,0.6) +
+  scale_color_manual(values = c("deepskyblue4", "darkslateblue", "darkorange4", "goldenrod4", "deeppink4", "darkolivegreen4"))
 NT_PCoA2500 <- plot_ordination(NT_Phylo_Rarefied2500, NT_Ordinate2500, color="Subregion", title = "None") + geom_point(size=2) + theme_bw() + 
-  theme(aspect.ratio = 1) + scale_color_manual(values = c("deepskyblue4", "darkslateblue", "darkorange4", "goldenrod4", "deeppink4", "darkolivegreen4"))
+  theme(aspect.ratio = 1, axis.text = element_blank(), axis.ticks = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +
+  theme(plot.title = element_text(face = "bold", size =14), axis.title = element_text(face = "bold", size =14), strip.text = element_text(face = "bold", size = 14)) + ylim(-0.5,0.5) + xlim(-0.5,0.6) +
+  scale_color_manual(values = c("deepskyblue4", "darkslateblue", "darkorange4", "goldenrod4", "deeppink4", "darkolivegreen4"))
 
 PCoA2500 <- ggarrange(OT_PCoA2500, ST_PCoA2500, NT_PCoA2500, common.legend = TRUE,
                       ncol = 3, nrow = 1, legend = "right", align = "hv") 
