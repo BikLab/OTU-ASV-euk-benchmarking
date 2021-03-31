@@ -1,0 +1,32 @@
+/var/spool/slurmd/job776811/slurm_script: line 27: activate: No such file or directory
+vsearch v2.7.0_linux_x86_64, 503.7GB RAM, 64 cores
+https://github.com/torognes/vsearch
+
+Reading file /tmp/qiime2-archive-p1m7s4cz/a14795bf-99a0-48af-8c58-3fd91ca3ef64/data/dna-sequences.fasta 100%
+94427932 nt in 55145 seqs, min 900, max 3718, avg 1712
+Masking 100%
+Counting k-mers 100%
+Creating k-mer index 100%
+Searching 100%
+Matching query sequences: 45914 of 1516297 (3.03%)
+vsearch v2.7.0_linux_x86_64, 503.7GB RAM, 64 cores
+https://github.com/torognes/vsearch
+
+Reading file /tmp/tmpt1b0298h 100%
+519459005 nt in 1470383 seqs, min 50, max 573, avg 353
+Getting sizes 100%
+Sorting 100%
+Median abundance: 1
+Writing output 100%
+vsearch v2.7.0_linux_x86_64, 503.7GB RAM, 64 cores
+https://github.com/torognes/vsearch
+
+Reading file /tmp/tmpacaq3x67 100%
+519459005 nt in 1470383 seqs, min 50, max 573, avg 353
+Sorting by abundance 100%
+Counting k-mers 100%
+Clustering 100%
+Sorting clusters 100%
+Writing clusters 100%
+Clusters: 193177 Size min 1, max 232107, avg 7.6
+Singletons: 126133, 8.6% of seqs, 65.3% of clusters

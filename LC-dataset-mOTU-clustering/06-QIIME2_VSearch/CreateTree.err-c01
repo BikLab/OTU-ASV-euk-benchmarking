@@ -1,0 +1,67 @@
+/var/spool/slurmd/job824536/slurm_script: line 22: activate: No such file or directory
+Usage: qiime phylogeny align-to-tree-mafft-fasttree [OPTIONS]
+
+  This pipeline will start by creating a sequence alignment using MAFFT,
+  after which any alignment columns that are phylogenetically uninformative
+  or ambiguously aligned will be removed (masked). The resulting masked
+  alignment will be used to infer a phylogenetic tree and then subsequently
+  rooted at its midpoint. Output files from each step of the pipeline will
+  be saved. This includes both the unmasked and masked MAFFT alignment from
+  q2-alignment methods, and both the rooted and unrooted phylogenies from
+  q2-phylogeny methods.
+
+Inputs:
+  --i-sequences ARTIFACT FeatureData[Sequence]
+                          The sequences to be used for creating a fasttree
+                          based rooted phylogenetic tree.           [required]
+Parameters:
+  --p-n-threads INTEGER   The number of threads. (Use 0 to automatically use
+    Range(0, None)        all available cores) This value is used when
+                          aligning the sequences and creating the tree with
+                          fasttree.                               [default: 1]
+  --p-mask-max-gap-frequency PROPORTION Range(0, 1, inclusive_end=True)
+                          The maximum relative frequency of gap characters in
+                          a column for the column to be retained. This
+                          relative frequency must be a number between 0.0 and
+                          1.0 (inclusive), where 0.0 retains only those
+                          columns without gap characters, and 1.0 retains all
+                          columns  regardless of gap character frequency. This
+                          value is used when masking the aligned sequences.
+                                                                [default: 1.0]
+  --p-mask-min-conservation PROPORTION Range(0, 1, inclusive_end=True)
+                          The minimum relative frequency of at least one
+                          non-gap character in a column for that column to be
+                          retained. This relative frequency must be a number
+                          between 0.0 and 1.0 (inclusive). For example, if a
+                          value of  0.4 is provided, a column will only be
+                          retained  if it contains at least one character that
+                          is present in at least 40% of the sequences. This
+                          value is used when masking the aligned sequences.
+                                                                [default: 0.4]
+Outputs:
+  --o-alignment ARTIFACT FeatureData[AlignedSequence]
+                          The aligned sequences.                    [required]
+  --o-masked-alignment ARTIFACT FeatureData[AlignedSequence]
+                          The masked alignment.                     [required]
+  --o-tree ARTIFACT       The unrooted phylogenetic tree.
+    Phylogeny[Unrooted]                                             [required]
+  --o-rooted-tree ARTIFACT
+    Phylogeny[Rooted]     The rooted phylogenetic tree.             [required]
+Miscellaneous:
+  --output-dir PATH       Output unspecified results to a directory
+  --verbose / --quiet     Display verbose output to stdout and/or stderr
+                          during execution of this action. Or silence output
+                          if execution is successful (silence is golden).
+  --citations             Show citations and exit.
+  --help                  Show this message and exit.
+
+                  There were some problems with the command:                  
+ (1/5) Invalid value for "--output-dir":
+  '/rhome/adesa002/shared/memb/18S/analysis-results/QIIME2_Eukbench_Jan2020/06
+  -QIIME2-VSearch/06G-MEMB_PhylogeneticTree/' already exists, will not
+  overwrite.
+ (2/5) Missing option "--o-alignment".  ("--output-dir" may also be used)
+ (3/5) Missing option "--o-masked-alignment".  ("--output-dir" may also be
+  used)
+ (4/5) Missing option "--o-tree".  ("--output-dir" may also be used)
+ (5/5) Missing option "--o-rooted-tree".  ("--output-dir" may also be used)

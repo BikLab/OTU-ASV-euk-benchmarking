@@ -1,0 +1,14 @@
+Running external command line application. This may print messages to stdout and/or stderr.
+The command being run is below. This command cannot be manually re-run as it will depend on temporary files that no longer exist.
+
+Command: mafft --preservecase --inputorder --thread 1 /tmp/qiime2-archive-r6qwljls/b1a9284e-84cb-465b-8920-bf34a8cec64f/data/dna-sequences.fasta
+
+Running external command line application. This may print messages to stdout and/or stderr.
+The command being run is below. This command cannot be manually re-run as it will depend on temporary files that no longer exist.
+
+Command: FastTree -quote -nt /tmp/qiime2-archive-218x0u5j/c40e4122-0d75-46b3-a83a-db8194619f36/data/aligned-dna-sequences.fasta
+
+Saved FeatureData[AlignedSequence] to: /rhome/adesa002/shared/memb/18S/analysis-results/QIIME2_Eukbench_Jan2020/06-QIIME2-VSearch/06G-MEMB_PhylogeneticTree/alignment.qza
+Saved FeatureData[AlignedSequence] to: /rhome/adesa002/shared/memb/18S/analysis-results/QIIME2_Eukbench_Jan2020/06-QIIME2-VSearch/06G-MEMB_PhylogeneticTree/masked_alignment.qza
+Saved Phylogeny[Unrooted] to: /rhome/adesa002/shared/memb/18S/analysis-results/QIIME2_Eukbench_Jan2020/06-QIIME2-VSearch/06G-MEMB_PhylogeneticTree/tree.qza
+Saved Phylogeny[Rooted] to: /rhome/adesa002/shared/memb/18S/analysis-results/QIIME2_Eukbench_Jan2020/06-QIIME2-VSearch/06G-MEMB_PhylogeneticTree/rooted_tree.qza

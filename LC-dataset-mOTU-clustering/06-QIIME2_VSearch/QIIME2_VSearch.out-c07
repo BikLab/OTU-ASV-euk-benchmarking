@@ -1,0 +1,20 @@
+Saved FeatureTable[Frequency] to: /rhome/adesa002/shared/memb/18S/analysis-results/QIIME2_Eukbench_Jan2020/06-QIIME2-VSearch/06B-MEMB_Dereplicate_RepTable_VSearch.qza
+Saved FeatureData[Sequence] to: /rhome/adesa002/shared/memb/18S/analysis-results/QIIME2_Eukbench_Jan2020/06-QIIME2-VSearch/06B-MEMB_Dereplicate_RepSeq_VSearch.qza
+Running external command line application. This may print messages to stdout and/or stderr.
+The command being run is below. This command cannot be manually re-run as it will depend on temporary files that no longer exist.
+
+Command: vsearch --usearch_global /tmp/tmpca99fp86 --id 0.99 --db /tmp/qiime2-archive-p1m7s4cz/a14795bf-99a0-48af-8c58-3fd91ca3ef64/data/dna-sequences.fasta --uc /tmp/tmplv38vcqc --strand plus --qmask none --notmatched /tmp/tmpt1b0298h --threads 1
+
+Running external command line application. This may print messages to stdout and/or stderr.
+The command being run is below. This command cannot be manually re-run as it will depend on temporary files that no longer exist.
+
+Command: vsearch --sortbysize /tmp/tmpt1b0298h --xsize --output /tmp/q2-DNAFASTAFormat-eo3ayz6l
+
+Running external command line application. This may print messages to stdout and/or stderr.
+The command being run is below. This command cannot be manually re-run as it will depend on temporary files that no longer exist.
+
+Command: vsearch --cluster_size /tmp/tmpacaq3x67 --id 0.99 --centroids /tmp/q2-DNAFASTAFormat-_s7my3tx --uc /tmp/tmp5rfwlsgb --qmask none --xsize --threads 1
+
+Saved FeatureTable[Frequency] to: /rhome/adesa002/shared/memb/18S/analysis-results/QIIME2_Eukbench_Jan2020/06-QIIME2-VSearch/06C-MEMB_Clustered_99_RepTable_VSearch.qza
+Saved FeatureData[Sequence] to: /rhome/adesa002/shared/memb/18S/analysis-results/QIIME2_Eukbench_Jan2020/06-QIIME2-VSearch/06C-MEMB_Clustered_99_RepSeq_VSearch.qza
+Saved FeatureData[Sequence] to: /rhome/adesa002/shared/memb/18S/analysis-results/QIIME2_Eukbench_Jan2020/06-QIIME2-VSearch/06C-MEMB_NewRefSeq_VSearch.qza

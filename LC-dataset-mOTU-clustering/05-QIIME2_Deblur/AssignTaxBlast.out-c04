@@ -1,0 +1,6 @@
+Running external command line application. This may print messages to stdout and/or stderr.
+The command being run is below. This command cannot be manually re-run as it will depend on temporary files that no longer exist.
+
+Command: blastn -query /tmp/qiime2-archive-jzhyobox/e6772871-7019-46b6-a6de-a9badbc73ecc/data/dna-sequences.fasta -evalue 0.001 -strand both -outfmt 7 -subject /tmp/qiime2-archive-4p_qf4h6/8fbf7d83-637a-460b-ae8a-e0a034a83c7f/data/dna-sequences.fasta -perc_identity 90.0 -qcov_hsp_perc 80.0 -max_target_seqs 10 -out /tmp/tmpu9w9ljcf
+
+Saved FeatureData[Taxonomy] to: /rhome/adesa002/shared/memb/18S/analysis-results/QIIME2_Eukbench_Jan2020/05-QIIME2_Deblur/05G-MEMB_BLAST_Taxonomy.qza
