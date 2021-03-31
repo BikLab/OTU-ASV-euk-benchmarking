@@ -1,2 +1,0 @@
-/rhome/adesa002/shared/pkgs/.conda/qiime2-2019.4/lib/python3.6/site-packages/q2_quality_filter/_filter.py:88: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
-  phred_offset = yaml.load(metadata_view)['phred-offset']
